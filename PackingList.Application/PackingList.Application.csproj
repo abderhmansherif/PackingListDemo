@@ -15,4 +15,8 @@
     <ProjectReference Include="..\PackingList.Domain\PackingList.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\Handlers\" />
+  </ItemGroup>
+
 </Project>
