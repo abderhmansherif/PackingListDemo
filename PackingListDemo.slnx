@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="PackingList.Application/PackingList.Application.csproj" />
+    <Project Path="PackingList.Domain/PackingList.Domain.csproj" />
+    <Project Path="PackingList.Infrastructure/PackingList.Infrastructure.csproj" />
+    <Project Path="PackingList.Shared/PackingList.Shared.csproj" />
+    <Project Path="PckingList.Presentation/PckingList.Presentation.csproj" />
+  </Folder>
+</Solution>

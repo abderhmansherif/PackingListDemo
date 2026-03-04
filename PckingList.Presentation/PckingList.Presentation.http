@@ -1,0 +1,6 @@
+@PckingList.Presentation_HostAddress = http://localhost:5172
+
+GET {{PckingList.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
