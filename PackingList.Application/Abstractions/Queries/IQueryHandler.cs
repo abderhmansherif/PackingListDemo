@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PackingList.Application.Abstractions.Queries
 {
-    public interface IQueryHandler<TQuery, TResult> where TQuery : class where TResult : class
+    public interface IQueryHandler<TQuery, TResult> 
     {
         Task<TResult> HandleAsync(TQuery query);
     }

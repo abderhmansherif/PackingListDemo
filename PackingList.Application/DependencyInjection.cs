@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PackingList.Application.Abstractions.Commands;
+using PackingList.Application.Abstractions.Queries;
 using PackingList.Application.Commands;
+using PackingList.Application.Queries;
 using PackingList.Domain.Factories;
 using PackingList.Domain.Policies;
 using System;
@@ -18,6 +20,8 @@ namespace PackingList.Application
 
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
+            services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+
             services.Scan(s => s.FromAssemblies(typeof(IPackingListPolicy).Assembly)
                         .AddClasses(c => c.AssignableTo(typeof(IPackingListPolicy)))
                         .AsImplementedInterfaces()
@@ -25,6 +29,11 @@ namespace PackingList.Application
 
             services.Scan(s => s.FromAssemblies(typeof(ICommandHandler<>).Assembly)
                         .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
+
+            services.Scan(s => s.FromAssemblies(typeof(IQueryHandler<,>).Assembly)
+                        .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
                         .AsImplementedInterfaces()
                         .WithScopedLifetime());
 
