@@ -1,7 +1,7 @@
 ﻿using PackingList.Domain.Events;
 using PackingList.Domain.Exceptions;
 using PackingList.Domain.ValueObjects;
-using PackingList.Shared.Abstractions;
+using PackingList.Shared.Abstractions.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;

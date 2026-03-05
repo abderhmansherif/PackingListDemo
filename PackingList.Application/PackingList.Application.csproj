@@ -13,10 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PackingList.Domain\PackingList.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Queries\Handlers\" />
+    <ProjectReference Include="..\PackingList.Shared.Abstractions\PackingList.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\PackingList.Shared\PackingList.Shared.csproj" />
   </ItemGroup>
 
 </Project>

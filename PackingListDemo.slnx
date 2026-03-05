@@ -3,6 +3,7 @@
     <Project Path="PackingList.Application/PackingList.Application.csproj" />
     <Project Path="PackingList.Domain/PackingList.Domain.csproj" />
     <Project Path="PackingList.Infrastructure/PackingList.Infrastructure.csproj" />
+    <Project Path="PackingList.Shared.Abstractions/PackingList.Shared.Abstractions.csproj" Id="b4da4daa-830c-4c48-8e00-74534e08d6ef" />
     <Project Path="PackingList.Shared/PackingList.Shared.csproj" />
     <Project Path="PckingList.Presentation/PckingList.Presentation.csproj" />
   </Folder>

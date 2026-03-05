@@ -1,9 +1,8 @@
-﻿using PackingList.Shared.Abstractions.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PackingList.Shared.Abstractions
+namespace PackingList.Shared.Abstractions.Domain
 {
     public class AggregateRoot
     {

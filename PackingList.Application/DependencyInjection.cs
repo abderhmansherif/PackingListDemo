@@ -5,6 +5,8 @@ using PackingList.Application.Commands;
 using PackingList.Application.Queries;
 using PackingList.Domain.Factories;
 using PackingList.Domain.Policies;
+using PackingList.Shared.Commands;
+using PackingList.Shared.Queries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -22,20 +24,14 @@ namespace PackingList.Application
 
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
 
+            services.AddCommands();
+
+            services.AddQueries();
+
             services.Scan(s => s.FromAssemblies(typeof(IPackingListPolicy).Assembly)
                         .AddClasses(c => c.AssignableTo(typeof(IPackingListPolicy)))
                         .AsImplementedInterfaces()
                         .WithSingletonLifetime());
-
-            services.Scan(s => s.FromAssemblies(typeof(ICommandHandler<>).Assembly)
-                        .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
-                        .AsImplementedInterfaces()
-                        .WithScopedLifetime());
-
-            services.Scan(s => s.FromAssemblies(typeof(IQueryHandler<,>).Assembly)
-                        .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-                        .AsImplementedInterfaces()
-                        .WithScopedLifetime());
 
             return services;
         }
