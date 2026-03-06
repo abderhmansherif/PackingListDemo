@@ -21,7 +21,17 @@ namespace PackingList.Domain.ValueObjects
             this.City = country;
         }
 
+        public static PackingListLocalization Create(string value)
+        {
+            var parts = value.Split(',',2);
 
+            return new PackingListLocalization(country: parts.First(), city: parts.Last());
+        }
+
+        public override string ToString()
+        {
+            return $"{Country},{City}";
+        }
 
         public static implicit operator string (PackingListLocalization localization)
                 => $"{localization.Country},{localization.City}";

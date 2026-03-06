@@ -25,6 +25,8 @@ namespace PackingList.Domain.Entities
             _localization = localization;
         }
 
+        private PackingList() { }
+
         public void AddItem(PackingListItem item)
         {
             if(_items.Any(x => x.Name == item.Name))
