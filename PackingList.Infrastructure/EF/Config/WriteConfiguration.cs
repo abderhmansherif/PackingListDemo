@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PackingList.Domain.ValueObjects;
-using PackingList.Infrastructure.EF.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PackingList.Infrastructure.EF.Config
 {
@@ -33,7 +29,7 @@ namespace PackingList.Infrastructure.EF.Config
 
 
             builder.HasMany(typeof(PackingListItem), "_items")
-                    .WithOne(); 
+                    .WithOne();
 
             builder.ToTable("PackingLists", "Packit");
         }

@@ -9,6 +9,5 @@ namespace PackingList.Application.Services
     public interface IPackingListReadService
     {
         Task<bool> ExistsPackingListNameAsync(string PackingListName);
-        Task<PackingListDTO> SearchAsync(string searchPhrase);
     }
 }

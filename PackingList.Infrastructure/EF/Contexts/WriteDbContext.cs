@@ -12,7 +12,7 @@ namespace PackingList.Infrastructure.EF.Contexts
         public DbSet<Domain.Entities.PackingList> PackingLists { get; set; }
 
 
-        public WriteDbContext(DbContextOptions options) : base(options)
+        public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
         {
         }
 

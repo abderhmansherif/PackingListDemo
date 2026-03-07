@@ -10,7 +10,7 @@ namespace PackingList.Infrastructure.EF.Contexts
 {
     internal class ReadDbContext: DbContext
     {
-        public ReadDbContext(DbContextOptions options):base(options)
+        public ReadDbContext(DbContextOptions<ReadDbContext> options):base(options)
         {
         }
         public DbSet<PackingListReadModel> PackingLists { get; set; }

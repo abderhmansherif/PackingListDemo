@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PackingList.Application.Queries
 {
-    internal sealed class QueryDispatcher : IQueryDispatcher
+    public sealed class QueryDispatcher : IQueryDispatcher
     {
         private readonly IServiceProvider _serviceProvider;
 
