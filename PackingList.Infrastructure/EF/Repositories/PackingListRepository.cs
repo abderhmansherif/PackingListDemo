@@ -15,19 +15,12 @@ namespace PackingList.Infrastructure.EF.Repositories
 
         public PackingListRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
             _packingLists = writeDbContext.PackingLists;
+            _writeDbContext = writeDbContext;
         }
 
-        public async Task DeleteAsync(Domain.Entities.PackingList packingList)
-        {
-            _packingLists.Remove(packingList);
-            await _writeDbContext.SaveChangesAsync();
-        }
-
-        public async Task<Domain.Entities.PackingList> GetAsync(PackingListId packingListId)
-            => await _packingLists.Include("_items").SingleOrDefaultAsync(pl => pl.Id == packingListId);
-        
+        public Task<Domain.Entities.PackingList> GetAsync(PackingListId id)
+            => _packingLists.Include("_items").SingleOrDefaultAsync(pl => pl.Id == id);
 
         public async Task InsertAsync(Domain.Entities.PackingList packingList)
         {
@@ -38,6 +31,12 @@ namespace PackingList.Infrastructure.EF.Repositories
         public async Task UpdateAsync(Domain.Entities.PackingList packingList)
         {
             _packingLists.Update(packingList);
+            await _writeDbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Domain.Entities.PackingList packingList)
+        {
+            _packingLists.Remove(packingList);
             await _writeDbContext.SaveChangesAsync();
         }
     }

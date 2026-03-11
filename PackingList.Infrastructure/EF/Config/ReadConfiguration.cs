@@ -7,28 +7,25 @@ using System.Text;
 
 namespace PackingList.Infrastructure.EF.Config
 {
-    internal sealed class ReadConfiguration : IEntityTypeConfiguration<PackingListReadModel>, 
-                                                IEntityTypeConfiguration<PackingListItemReadModel>
+    internal sealed class ReadConfiguration : IEntityTypeConfiguration<PackingListReadModel>, IEntityTypeConfiguration<PackingListItemReadModel>
     {
         public void Configure(EntityTypeBuilder<PackingListReadModel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.ToTable("PackingLists", "packit");
+            builder.HasKey(pl => pl.Id);
 
-            builder.ToTable("PackingLists", schema: "Packit");
+            builder
+                .Property(pl => pl.Localization)
+                .HasConversion(l => l.ToString(), l => LocalizationReadModel.Create(l));
 
-            builder.HasMany(x => x.Items)
-                   .WithOne(x => x.PackingListReadModel)
-                   .HasForeignKey(x => x.PackingListId);
-
-            builder.Property(x => x.Localization)
-                .HasConversion(x => x.ToString(), v => LocalizationReadModel.Create(v))
-                .HasColumnName("Localization");
+            builder
+                .HasMany(pl => pl.Items)
+                .WithOne(pi => pi.PackingListReadModel);
         }
 
         public void Configure(EntityTypeBuilder<PackingListItemReadModel> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.ToTable("PackingListItems", schema: "Packit");
+            builder.ToTable("PackingItems", "packit");
         }
     }
 }

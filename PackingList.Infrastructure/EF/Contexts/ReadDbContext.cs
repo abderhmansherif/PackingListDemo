@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PackingList.Infrastructure.EF.Contexts
 {
-    internal class ReadDbContext: DbContext
+    public class ReadDbContext: DbContext
     {
         public ReadDbContext(DbContextOptions<ReadDbContext> options):base(options)
         {

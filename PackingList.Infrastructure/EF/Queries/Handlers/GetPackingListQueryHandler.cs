@@ -10,7 +10,7 @@ using System.Text;
 
 namespace PackingList.Infrastructure.EF.Queries.Handlers
 {
-    internal class GetPackingListQueryHandler : IQueryHandler<GetPackingListQuery, PackingListDTO>
+    public class GetPackingListQueryHandler : IQueryHandler<GetPackingListQuery, PackingListDTO>
     {
         private readonly DbSet<PackingListReadModel> _packingLists;
         public GetPackingListQueryHandler(ReadDbContext readDbContext)

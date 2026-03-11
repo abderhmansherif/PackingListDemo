@@ -9,39 +9,40 @@ namespace PackingList.Infrastructure.EF.Config
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.PackingList> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .HasConversion(x => x.Value, v => new Domain.ValueObjects.PackingListId(v));
+            builder.HasKey(pl => pl.Id);
 
-            var localizationComverter = new ValueConverter<PackingListLocalization, string>
-                (l => l.ToString(), v => PackingListLocalization.Create(v));
+            var localizationConverter = new ValueConverter<PackingListLocalization, string>(l => l.ToString(),
+                l => PackingListLocalization.Create(l));
 
-            var nameConverter = new ValueConverter<PackingListName, string>(x => x.Value, v => new PackingListName(v));
+            var packingListNameConverter = new ValueConverter<PackingListName, string>(pln => pln.Value,
+                pln => new PackingListName(pln));
 
-            builder.Property(typeof(PackingListName), "_name")
-                    .HasConversion(nameConverter)
-                    .HasColumnName("Name");
+            builder
+                .Property(pl => pl.Id)
+                .HasConversion(id => id.Value, id => new PackingListId(id));
 
+            builder
+                .Property(typeof(PackingListLocalization), "_localization")
+                .HasConversion(localizationConverter)
+                .HasColumnName("Localization");
 
-            builder.Property(typeof(PackingListLocalization), "_localization")
-                    .HasConversion(localizationComverter)
-                    .HasColumnName("Localization");
+            builder
+                .Property(typeof(PackingListName), "_name")
+                .HasConversion(packingListNameConverter)
+                .HasColumnName("Name");
 
+            builder.HasMany(typeof(PackingListItem), "_items");
 
-            builder.HasMany(typeof(PackingListItem), "_items")
-                    .WithOne();
-
-            builder.ToTable("PackingLists", "Packit");
+            builder.ToTable("PackingLists", "packit");
         }
 
         public void Configure(EntityTypeBuilder<PackingListItem> builder)
         {
             builder.Property<Guid>("Id");
-            builder.HasKey("Id");          
-            builder.Property(x => x.Name);
-            builder.Property(x => x.Quantity);
-            builder.Property(x => x.IsPacked);
-
+            builder.Property(pi => pi.Name);
+            builder.Property(pi => pi.Quantity);
+            builder.Property(pi => pi.IsPacked);
+            builder.ToTable("PackingItems", "packit");
         }
     }
 }

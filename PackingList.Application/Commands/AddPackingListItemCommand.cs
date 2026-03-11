@@ -5,6 +5,6 @@ using PackingList.Application.Abstractions.Commands;
 
 namespace PackingList.Application.Commands
 {
-    public record AddPackingListItemCommand(Guid PackingListId, string NItemame, int ItemQuantity) : ICommand;
+    public record AddPackingListItemCommand(Guid PackingListId, string ItemName, int ItemQuantity) : ICommand;
   
 }

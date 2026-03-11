@@ -75,7 +75,7 @@ namespace PackingList.Domain.Entities
 
         private PackingListItem GetItem(string ItemName)
         {
-            var item = _items.SingleOrDefault(x => x.Name == ItemName);
+            var item = _items.SingleOrDefault(x => x.Name.ToLower() == ItemName.ToLower());
 
             if(item is null)
             {

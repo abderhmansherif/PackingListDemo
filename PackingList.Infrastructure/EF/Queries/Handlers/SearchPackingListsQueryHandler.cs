@@ -10,7 +10,7 @@ using System.Text;
 
 namespace PackingList.Infrastructure.EF.Queries.Handlers
 {
-    internal class SearchPackingListsQueryHandler : IQueryHandler<SearchPackingListsQuery, IEnumerable<PackingListDTO>>
+    public class SearchPackingListsQueryHandler : IQueryHandler<SearchPackingListsQuery, IEnumerable<PackingListDTO>>
     {
         private readonly DbSet<PackingListReadModel> _packingLists;
         public SearchPackingListsQueryHandler(ReadDbContext readDbContext)
@@ -26,9 +26,9 @@ namespace PackingList.Infrastructure.EF.Queries.Handlers
                     Microsoft.EntityFrameworkCore.EF.Functions.Like(pl.Name, $"%{query.searchPhrase}%"));
             }
 
-            await packingLists.ToListAsync();
+            var packits = await packingLists.ToListAsync();
 
-            return packingLists.Select(pl => pl.AsDTO());
+            return packits.Select(pl => pl.AsDTO());
         }
     }
 }

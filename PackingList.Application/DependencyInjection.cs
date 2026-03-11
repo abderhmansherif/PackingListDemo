@@ -26,8 +26,6 @@ namespace PackingList.Application
 
             services.AddCommands();
 
-            services.AddQueries();
-
             services.Scan(s => s.FromAssemblies(typeof(IPackingListPolicy).Assembly)
                         .AddClasses(c => c.AssignableTo(typeof(IPackingListPolicy)))
                         .AsImplementedInterfaces()

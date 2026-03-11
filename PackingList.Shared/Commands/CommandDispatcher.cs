@@ -18,7 +18,8 @@ namespace PackingList.Application.Commands
 
         public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
         {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
+            using var scope = _serviceProvider.CreateScope();
+            var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
             await handler.HandleAsync(command);
         }
     }

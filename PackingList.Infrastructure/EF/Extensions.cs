@@ -21,8 +21,8 @@ namespace PackingList.Infrastructure.EF
         {
             var option = configuration.GetOption<SqlServerConfiguration>("sqlserver");
 
-            services.AddDbContext<ReadDbContext>(ctx => ctx.UseSqlServer(option.ConnectionString));
-            services.AddDbContext<WriteDbContext>(ctx => ctx.UseSqlServer(option.ConnectionString));
+            services.AddDbContext<ReadDbContext>(ctx => ctx.UseNpgsql(option.ConnectionString));
+            services.AddDbContext<WriteDbContext>(ctx => ctx.UseNpgsql(option.ConnectionString));
 
             services.AddScoped<IPackingListRepository, PackingListRepository>();
             services.AddScoped<IPackingListReadService, PackingListReadService>();

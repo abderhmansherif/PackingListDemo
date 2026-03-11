@@ -2,13 +2,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PackingList.Infrastructure.EF.Contexts;
 
 #nullable disable
 
-namespace PackingList.Infrastructure.EF.Migrations
+namespace PackingList.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
     partial class ReadDbContextModelSnapshot : ModelSnapshot
@@ -18,53 +18,52 @@ namespace PackingList.Infrastructure.EF.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("PackingList.Infrastructure.EF.Models.PackingListItemReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsPacked")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("PackingListId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PackingListId");
 
-                    b.ToTable("PackingListItems", "Packit");
+                    b.ToTable("PackingItems", "packit");
                 });
 
             modelBuilder.Entity("PackingList.Infrastructure.EF.Models.PackingListReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Localization")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Localization");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PackingLists", "Packit");
+                    b.ToTable("PackingLists", "packit");
                 });
 
             modelBuilder.Entity("PackingList.Infrastructure.EF.Models.PackingListItemReadModel", b =>

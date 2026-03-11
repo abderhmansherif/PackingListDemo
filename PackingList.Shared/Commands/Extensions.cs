@@ -2,6 +2,7 @@
 using PackingList.Application.Abstractions.Commands;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace PackingList.Shared.Commands
@@ -10,7 +11,8 @@ namespace PackingList.Shared.Commands
     {
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
-            services.Scan(s => s.FromAssemblies(typeof(ICommandHandler<>).Assembly)
+            var assembly = Assembly.GetCallingAssembly();
+            services.Scan(s => s.FromAssemblies(assembly)
                     .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
